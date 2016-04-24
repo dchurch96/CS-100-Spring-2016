@@ -71,7 +71,7 @@ void grow(char *name, char *name2, ppmPic *head){
     fprintf(fp, "P3\n%d %d %d\n", ptr->cols, ptr->rows, ptr->colors);
     Pixel **pix;
     pix = ptr->pixels;
-    printf("hello\n");
+
     int i, j;
     for (i = 0; i<row; i++){
         for (j=0; j<col; j++){
@@ -85,12 +85,41 @@ void grow(char *name, char *name2, ppmPic *head){
         }
     }
     
-    
     fclose(fp);
     return;
 }
 
 void shrink(char *name, char *name2, ppmPic *head){
-    printf("shrink");
+    int col = head->cols;
+    int row = head->rows;
+    
+    FILE *fp = fopen(name2, "w");
+    ppmPic *ptr = head;
+    
+    if(col%2 != 0) col = col - 1;
+    if(row%2 != 0) row = row - 1;
+    
+    ptr->cols = col/2;
+    ptr->rows = row/2;
+    
+    col = col/2;
+    row = row/2;
+    
+    fprintf(fp, "P3\n%d %d %d\n", ptr->cols, ptr->rows, ptr->colors);
+    Pixel **pix;
+    pix = ptr->pixels;
+
+    int i, j;
+    for (i = 0; i<row; i++){
+        for (j=0; j<col; j++){
+            int red = (pix[i*2][j*2].red + pix[i*2 + 1][j*2].red + pix[i*2][j*2 + 1].red + pix[i*2 + 1][j*2 + 1].red)/4;
+            int blue = (pix[i*2][j*2].blue + pix[i*2 + 1][j*2].blue + pix[i*2][j*2 + 1].blue + pix[i*2 + 1][j*2 + 1].blue)/4;
+            int green = (pix[i*2][j*2].green + pix[i*2 + 1][j*2].green + pix[i*2][j*2 + 1].green + pix[i*2 + 1][j*2 + 1].green)/4;
+            fprintf(fp, "%d\n%d\n%d\n", red, blue, green);
+
+        }
+    }
+    
+    fclose(fp);
     return;
 }
