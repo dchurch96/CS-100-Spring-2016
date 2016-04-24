@@ -16,9 +16,9 @@ typedef struct ppm {
 } ppmPic;
 
 
-void read(char *, ppmPic *);
-void write();
-void copy();
+ppmPic *read(char *);
+void write(char *, char *, ppmPic *);
+void copy(char *, ppmPic *);
 void grow();
 void shrink();
 

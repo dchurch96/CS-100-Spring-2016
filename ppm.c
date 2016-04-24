@@ -1,7 +1,7 @@
 #include "ppm.h"
 #include "scanner.h"
 
-void read(char *name, ppmPic *head){
+ppmPic *read(char *name){
     ppmPic *ptr = malloc(sizeof(ppmPic));
     FILE *fp = fopen(name, "r");
     
@@ -20,24 +20,44 @@ void read(char *name, ppmPic *head){
     
     for (i = 0; i<ptr->rows; i++){
         for (j=0; j<ptr->cols; j++){
-        pix[i][j].red = readInt(fp);
-        pix[i][j].blue = readInt(fp);
-        pix[i][j].green = readInt(fp);
-        printf("%d %d %d    ", pix[i][j].red, pix[i][j].blue, pix[i][j].green);
+            pix[i][j].red = readInt(fp);
+            pix[i][j].blue = readInt(fp);
+            pix[i][j].green = readInt(fp);
+            printf("%d %d %d    ", pix[i][j].red, pix[i][j].blue, pix[i][j].green);
         }
         printf("\n");
     }
     
+    ptr->pixels = pix;
+    
     fclose(fp);
+    return ptr;
+}
+
+void write(char *name, char *name2, ppmPic *head){
+    FILE *fp = fopen(name2, "w");
+    
+    ppmPic *ptr = head;
+    
+    fprintf(fp, "P3\n%d %d %d\n", ptr->cols, ptr->rows, ptr->colors);
+    Pixel **pix;
+    pix = ptr->pixels;
+    printf("hello\n");
+    printf("%d\n", pix[1][1].blue);
+    printf("hello\n");
+    int i, j;
+    for (i = 0; i<ptr->rows; i++){
+        for (j=0; j<ptr->cols; j++){
+            fprintf(fp, "%d\n%d\n%d\n", pix[i][j].red, pix[i][j].blue, pix[i][j].green);
+            printf("%d %d %d    ", pix[i][j].red, pix[i][j].blue, pix[i][j].green);
+        }
+        printf("\n");
+    }
+    
     return;
 }
 
-void write(){
-    printf("write");
-    return;
-}
-
-void copy(){
+void copy(char *name, ppmPic *head){
     printf("copy");
     return;
 }
