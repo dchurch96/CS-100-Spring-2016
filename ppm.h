@@ -20,5 +20,5 @@ ppmPic *read(char *);
 void write(char *, char *, ppmPic *);
 void copy(char *, char *);
 void grow(char *, char *, ppmPic *head);
-void shrink();
+void shrink(char *, char *, ppmPic *head);
 
