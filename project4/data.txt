@@ -1,0 +1,29 @@
+printPlayers
+addOrder Daniel
+printPlayers
+addOrder John
+printPlayers
+addOrder Andrew
+printPlayers
+addOrder Pat
+printPlayers
+addOrder Nathan
+printPlayers
+addItemOrder Daniel bird 2
+addItemOrder Nathan cat 10
+printEverything
+addItemOrder Andrew cat 3
+addItemOrder Pat dog 5
+printEverything
+addItemOrder John dog 15
+addItemOrder Andrew donut 24
+printEverything
+countPlayers
+countItems John
+countItems Andrew
+countItems Pat
+numItems dog
+numItems donut
+gives Andrew Nathan cat
+printEverything
+
